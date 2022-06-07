@@ -37,13 +37,9 @@ public class UserController {
         return Result.ok(iPage);
     }
 
-    @GetMapping("/Test")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public String getTest(){
-        return "亲爱的管理员";
-    }
 
-    @GetMapping("/Test")
+
+    @GetMapping("/Test2")
     @PreAuthorize("hasAnyRole('USER')")
     public String USER(){
         return "亲爱的管理员";

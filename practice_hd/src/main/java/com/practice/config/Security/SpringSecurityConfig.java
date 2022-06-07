@@ -22,12 +22,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    public TokenAuthenticationTokenFilter getTokenFiter(){
+        return new TokenAuthenticationTokenFilter();
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //http.addFilterBefore(new VerCodeFi    lter("/Login/Login"), UsernamePasswordAuthenticationFilter.class);
 
 
-        http.addFilterBefore(new TokenAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(getTokenFiter(), UsernamePasswordAuthenticationFilter.class);
 
 
         http

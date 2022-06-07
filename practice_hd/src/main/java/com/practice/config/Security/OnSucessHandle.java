@@ -11,6 +11,8 @@ import java.io.IOException;
 public class OnSucessHandle implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+
+        response.setCharacterEncoding("utf-8");
         response.getWriter().write("登录成功");
     }
 }

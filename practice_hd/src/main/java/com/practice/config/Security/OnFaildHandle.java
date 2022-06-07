@@ -11,6 +11,8 @@ import java.io.IOException;
 public class OnFaildHandle implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+
+        response.setCharacterEncoding("utf-8");
         response.getWriter().write("登录失败");
     }
 }

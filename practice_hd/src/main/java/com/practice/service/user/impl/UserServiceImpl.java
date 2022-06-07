@@ -40,6 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             User user1=new User();
             user1.setPassword(pwd);
             user1.setUsername(user.getUsername());
+            user1.set
             this.saveOrUpdate(user1);
             return true;
         }
@@ -63,7 +64,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public String CreteToken(User u){
         String token= UUID.randomUUID().toString();
 
-        redisUtils.set(token,u,30*60*60); //设置30分钟过期
+        Userdto userdto=new Userdto();
+        userdto.setRole("ROLE_ADMIN");
+        userdto.setUserName(u.getUsername());
+        userdto.setPassword(u.getPassword());
+
+
+        redisUtils.set(token,userdto,30*60*60); //设置30分钟过期
 
 
         return token;

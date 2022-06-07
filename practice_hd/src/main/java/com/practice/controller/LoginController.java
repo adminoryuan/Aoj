@@ -106,7 +106,7 @@ public class LoginController {
 
 
 
-    @PostMapping("/Login")
+    @PostMapping("/Sigle")
     public Result Login(@Validated @RequestBody Userdto data,
                         HttpServletRequest request){
         HttpSession session = request.getSession();
