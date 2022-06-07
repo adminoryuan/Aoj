@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 9991
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,6 +12,14 @@ spring:
     port: 25
     username: 1317332365@qq.com
     password: djafnupbmbqigacb
+  redis:
+    host: 120.48.61.75
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 32
+        max-idle: 8
 mybatis-plus:
   # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
   mapper-locations: classpath:mapper/*.xml

@@ -8,6 +8,7 @@ import com.practice.common.Result;
 import com.practice.entity.User;
 import com.practice.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -24,6 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/queryUserPage")
     public Result queryUserPage(@RequestParam(defaultValue = "") String username, @RequestParam(defaultValue = "") Integer current, @RequestParam(defaultValue = "") Integer size) {
         IPage iPage = new Page(current, size);
@@ -35,6 +37,22 @@ public class UserController {
         return Result.ok(iPage);
     }
 
+    @GetMapping("/Test")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public String getTest(){
+        return "亲爱的管理员";
+    }
+
+    @GetMapping("/Test")
+    @PreAuthorize("hasAnyRole('USER')")
+    public String USER(){
+        return "亲爱的管理员";
+    }
+
+    @GetMapping("/Test1")
+    public String getTest1(){
+        return "asdasd";
+    }
 
 
 }

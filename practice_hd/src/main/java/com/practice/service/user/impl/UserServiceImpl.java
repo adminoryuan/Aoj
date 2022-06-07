@@ -8,6 +8,10 @@ import com.practice.mapper.UserMapper;
 import com.practice.service.user.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.practice.utils.MD5Utils;
+import com.practice.utils.RedisUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -23,17 +27,19 @@ import java.util.function.Function;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+    @Autowired
+    RedisUtils redisUtils;
 
     @Override
     public boolean register(Userdto user) {
-        User getUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUserName()));
+        User getUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
         if (null != getUser) {
             return false;
         } else {
             String pwd = MD5Utils.string2MD5(user.getPassword());
             User user1=new User();
             user1.setPassword(pwd);
-            user1.setUsername(user.getUserName());
+            user1.setUsername(user.getUsername());
             this.saveOrUpdate(user1);
             return true;
         }
@@ -41,9 +47,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public String Login(Userdto user) {
+        System.out.println(user.getUsername());
         String pwd1 = MD5Utils.string2MD5(user.getPassword());
-        User user1 = this.getOne(new QueryWrapper<User>().eq("username", user.getUserName()).eq("password", pwd1));
-        return user1 == null?null:CreteToken(user1);
+        System.out.println(pwd1);
+        User user1 = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()).eq("password", pwd1));
+        if (user1==null) return null;
+        return CreteToken(user1);
     }
 
     /**
@@ -53,6 +62,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     public String CreteToken(User u){
         String token= UUID.randomUUID().toString();
+
+        redisUtils.set(token,u,30*60*60); //设置30分钟过期
+
 
         return token;
     }

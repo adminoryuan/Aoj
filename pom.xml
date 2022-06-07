@@ -21,9 +21,5 @@
     </modules>
 
     <dependencies>
-        <!-- spring-boot的web启动的jar包 -->
-
-
-
     </dependencies>
 </project>

@@ -7,6 +7,8 @@ import com.practice.service.user.AbstSendverCode;
 import com.practice.service.user.UserService;
 import com.practice.utils.CheckCodeUtil;
 import com.sun.org.apache.bcel.internal.generic.I2F;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,9 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@RestController
+@Api(value = "Login" ,description = "登录注册接口")
+@RestController()
+@RequestMapping("/Login")
 public class LoginController {
 
     @Autowired
@@ -34,6 +38,7 @@ public class LoginController {
      * @param response
      */
     @GetMapping("/VerCode")
+    @ApiOperation(value = "返回验证码")
     public void VerCode(HttpServletRequest request,
                         HttpServletResponse response){
         try {
@@ -129,7 +134,7 @@ public class LoginController {
             return Result.failed("请输入正确的验证码");
         }
 
-      if (!user.getUserName().equals(session.getAttribute("EmailCode").toString().split("-")[1])){
+      if (!user.getUsername().equals(session.getAttribute("EmailCode").toString().split("-")[1])){
             return Result.failed("年轻人不要胡乱测试！！！");
         }
 
