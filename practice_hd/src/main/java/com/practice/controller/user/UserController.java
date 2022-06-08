@@ -25,7 +25,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/queryUserPage")
     public Result queryUserPage(@RequestParam(defaultValue = "") String username, @RequestParam(defaultValue = "") Integer current, @RequestParam(defaultValue = "") Integer size) {
         IPage iPage = new Page(current, size);
@@ -39,16 +38,12 @@ public class UserController {
 
 
 
-    @GetMapping("/Test2")
+    @GetMapping("/role")
     @PreAuthorize("hasAnyRole('USER')")
     public String USER(){
         return "亲爱的管理员";
     }
 
-    @GetMapping("/Test1")
-    public String getTest1(){
-        return "asdasd";
-    }
 
 
 }

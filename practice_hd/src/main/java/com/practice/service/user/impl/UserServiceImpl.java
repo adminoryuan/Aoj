@@ -40,7 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             User user1=new User();
             user1.setPassword(pwd);
             user1.setUsername(user.getUsername());
-            user1.set
+
             this.saveOrUpdate(user1);
             return true;
         }

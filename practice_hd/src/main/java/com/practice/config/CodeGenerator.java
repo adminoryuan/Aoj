@@ -24,7 +24,7 @@ public class CodeGenerator {
     private static final String PACKAGE_NAME = "com.practice";
 
     // 表名,多个表使用英文逗号分割
-    private static final String[] TBL_NAMES = { "practice_user","subject","sheet" };
+    private static final String[] TBL_NAMES = { "practice_problem" ,"sheet","subject"};
 
     // 表名的前缀,从表生成代码时会去掉前缀
     private static final String TABLE_PREFIX = "practice_";
@@ -119,7 +119,7 @@ public class CodeGenerator {
                         .enableSkipView()
                         .disableSqlFilter()
                         .addInclude(TBL_NAMES)
-                        .addTablePrefix(TABLE_PREFIX)
+                       // .addTablePrefix(TABLE_PREFIX)
         );
 
 

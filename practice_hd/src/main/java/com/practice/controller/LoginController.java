@@ -67,7 +67,7 @@ public class LoginController {
 
         HttpSession session = request.getSession();
 
-//
+
         if(session.getAttribute("EmailCode")!=null){
             return Result.failed("验证码发送太频繁 请稍后在发送！！");
         }
@@ -81,12 +81,11 @@ public class LoginController {
             return Result.failed("邮箱格式错误");
         }
 
-        //将发送的验证码写入session
         String sendCode = sendCodeObj.Send(email);
 
         session.setAttribute("EmailCode",sendCode+"-"+email);
 
-        session.setMaxInactiveInterval(6);//设置60 秒过期
+        session.setMaxInactiveInterval(6);
 
         return Result.ok("邮件发送成功");
     }
