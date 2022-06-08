@@ -1,13 +1,10 @@
-package com.practice.dto;
+package com.practice.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.practice.entity.User;
 import lombok.Data;
-import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.print.DocFlavor;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 

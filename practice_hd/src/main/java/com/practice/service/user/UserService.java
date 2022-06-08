@@ -1,6 +1,6 @@
 package com.practice.service.user;
 
-import com.practice.dto.Userdto;
+import com.practice.pojo.Userdto;
 import com.practice.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 

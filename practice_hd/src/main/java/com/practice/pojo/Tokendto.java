@@ -1,4 +1,4 @@
-package com.practice.dto;
+package com.practice.pojo;
 
 /**
  * 保存登录

@@ -1,12 +1,10 @@
 package com.practice.controller;
 
 import com.practice.common.Result;
-import com.practice.dto.Userdto;
-import com.practice.entity.User;
+import com.practice.pojo.Userdto;
 import com.practice.service.user.AbstSendverCode;
 import com.practice.service.user.UserService;
 import com.practice.utils.CheckCodeUtil;
-import com.sun.org.apache.bcel.internal.generic.I2F;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

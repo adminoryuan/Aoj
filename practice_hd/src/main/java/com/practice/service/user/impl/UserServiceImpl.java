@@ -1,8 +1,7 @@
 package com.practice.service.user.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.practice.dto.Userdto;
+import com.practice.pojo.Userdto;
 import com.practice.entity.User;
 import com.practice.mapper.UserMapper;
 import com.practice.service.user.UserService;
@@ -10,12 +9,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.practice.utils.MD5Utils;
 import com.practice.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-import java.util.function.Function;
 
 /**
  * <p>
@@ -39,7 +35,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             String pwd = MD5Utils.string2MD5(user.getPassword());
             User user1=new User();
             user1.setPassword(pwd);
-            user1.setUsername(user.getUsername());
+            /**
+             *
+             */
+            user1.setEmail(user.getUsername());
 
             this.saveOrUpdate(user1);
             return true;

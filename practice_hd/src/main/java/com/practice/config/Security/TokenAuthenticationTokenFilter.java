@@ -2,19 +2,15 @@ package com.practice.config.Security;
 
 import com.alibaba.fastjson.JSON;
 import com.practice.common.Result;
-import com.practice.dto.Userdto;
+import com.practice.pojo.Userdto;
 import com.practice.utils.RedisUtils;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

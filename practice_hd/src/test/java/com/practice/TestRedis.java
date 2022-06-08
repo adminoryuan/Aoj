@@ -1,12 +1,11 @@
 package com.practice;
 
 import com.alibaba.fastjson.JSON;
-import com.practice.dto.Userdto;
+import com.practice.pojo.Userdto;
 import com.practice.utils.RedisUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
