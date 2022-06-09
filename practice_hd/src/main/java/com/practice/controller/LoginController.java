@@ -117,9 +117,10 @@ public class LoginController {
         }
 
         String token = service.Login(data);
-
         if (token != null) {
-            return Result.ok(200, "登录成功", token);
+            User username = service.getOne(new QueryWrapper<User>().eq("username", data.getCode()));
+            username.setToken(token);
+            return Result.ok(200, "登录成功", username);
         }
         return Result.failed("账号或者密码错误");
     }

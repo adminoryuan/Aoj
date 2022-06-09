@@ -69,10 +69,20 @@ public class User {
     @TableField("state")
     private String state;
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @TableField("deleted")
     @TableLogic
     private String deleted;
 
+    @TableField(exist = false)
+    private String token;
     @Override
     public String toString() {
         return "User{" +

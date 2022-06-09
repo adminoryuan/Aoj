@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
-@Data
+//@Data
 public class Userdto implements UserDetails {
 
    @JsonProperty("Code")
@@ -23,6 +23,43 @@ public class Userdto implements UserDetails {
    @NotBlank(message = "密码不为空")
    String Password;
 
+   @Override
+   public String toString() {
+      return "Userdto{" +
+              "Code='" + Code + '\'' +
+              ", UserName='" + UserName + '\'' +
+              ", Password='" + Password + '\'' +
+              ", Role='" + Role + '\'' +
+              '}';
+   }
+
+   public String getCode() {
+      return Code;
+   }
+
+   public void setCode(String code) {
+      Code = code;
+   }
+
+   public String getUserName() {
+      return UserName;
+   }
+
+   public void setUserName(String userName) {
+      UserName = userName;
+   }
+
+   public void setPassword(String password) {
+      Password = password;
+   }
+
+   public String getRole() {
+      return Role;
+   }
+
+   public void setRole(String role) {
+      Role = role;
+   }
 
    String Role;
 
