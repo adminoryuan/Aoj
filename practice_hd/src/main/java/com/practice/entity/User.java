@@ -73,6 +73,42 @@ public class User {
     @TableLogic
     private String deleted;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", emailVerified='" + emailVerified + '\'' +
+                ", trueName='" + trueName + '\'' +
+                ", idCard='" + idCard + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", organizationId='" + organizationId + '\'' +
+                ", state='" + state + '\'' +
+                ", deleted='" + deleted + '\'' +
+                ", code='" + code + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                '}';
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @TableField(exist = false)
+    private String code;
+
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private String createTime;
 
@@ -224,27 +260,4 @@ public class User {
     private String updateTime;
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", sex='" + sex + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", emailVerified='" + emailVerified + '\'' +
-                ", trueName='" + trueName + '\'' +
-                ", idCard='" + idCard + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", organizationId='" + organizationId + '\'' +
-                ", state='" + state + '\'' +
-                ", deleted='" + deleted + '\'' +
-                ", createTime='" + createTime + '\'' +
-                ", updateTime='" + updateTime + '\'' +
-                '}';
-    }
 }

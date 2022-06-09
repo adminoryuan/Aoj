@@ -27,30 +27,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     RedisUtils redisUtils;
 
     @Override
-    public boolean register(Userdto user) {
+    public boolean register(User user) {
         User getUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
         if (null != getUser) {
             return false;
         } else {
-            String pwd = MD5Utils.string2MD5(user.getPassword());
-            User user1=new User();
-            user1.setPassword(pwd);
-            /**
-             *
-             */
-            user1.setEmail(user.getUsername());
-
-            this.saveOrUpdate(user1);
+//            String pwd = MD5Utils.string2MD5(user.getPassword());
+//            User user1=new User();
+//            user1.setPassword(user.getPassword());
+//            user1.setEmail(user.getUsername());
+            this.saveOrUpdate(user);
             return true;
         }
     }
 
     @Override
     public String Login(Userdto user) {
-        System.out.println(user.getUsername());
-        String pwd1 = MD5Utils.string2MD5(user.getPassword());
-        System.out.println(pwd1);
-        User user1 = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()).eq("password", pwd1));
+//        System.out.println(user.getUsername());
+//        String pwd1 = MD5Utils.string2MD5(user.getPassword());
+//        System.out.println(pwd1);
+        User user1 = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()).eq("password", user.getPassword()));
         if (user1==null) return null;
         return CreteToken(user1);
     }

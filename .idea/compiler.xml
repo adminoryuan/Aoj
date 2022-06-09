@@ -7,8 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="JudgingServer" />
+        <module name="practice_hd" />
         <module name="practice_hd (1) (com.practice)" />
+        <module name="JudgingServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

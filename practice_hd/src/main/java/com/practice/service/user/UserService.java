@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-06-05 21:27:28
  */
 public interface UserService extends IService<User> {
-    boolean register(Userdto user);
+    boolean register(User user);
 
     /**
      * 返回token
