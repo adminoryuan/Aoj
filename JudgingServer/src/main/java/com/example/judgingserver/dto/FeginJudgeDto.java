@@ -10,16 +10,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public class CompileDto {
+public class FeginJudgeDto {
 
 
      String status;
 
      String exitStatus;
 
-     String  time;
-     String memory;
-     String runTime;
+     long  time;
+
+     long memory;
+
+     long runTime;
+
      String stderr;
 
      String stdout;
@@ -39,8 +42,8 @@ public class CompileDto {
             this.exitStatus=parse.getString("exitStatus");
 
             this.status=parse.getString("status");
-            this.runTime=parse.getString("runTime");
-            this.memory=parse.getString("memory");
+            this.runTime=parse.getLong("runTime");
+            this.memory= parse.getLong("memory");
 
             JSONObject files = JSON.parseObject(parse.getString("files"));
 
@@ -52,6 +55,7 @@ public class CompileDto {
 
         }
         catch (Exception e){
+            System.out.println(e.toString());
             return false;
         }
         return true;

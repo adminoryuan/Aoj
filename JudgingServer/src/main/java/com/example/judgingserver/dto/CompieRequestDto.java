@@ -13,12 +13,12 @@ import lombok.Setter;
  */
 public class CompieRequestDto {
 
-  String[] arge;
+  String[] args;
   String[] env;
   JSONObject[] files;
-  String cpuLimit;
-  String memoryLimit;
-  String procLimit;
+  Long cpuLimit;
+  Long memoryLimit;
+  Long procLimit;
 
   JSONObject copyin;
 
@@ -27,5 +27,7 @@ public class CompieRequestDto {
   String[] copyOutCached;
 
   String copyOutDir;
+
+  boolean StrictMemoryLimit;
 
 };

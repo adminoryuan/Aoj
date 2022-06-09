@@ -1,6 +1,6 @@
 package com.example.judgingserver.Server;
 
-import com.example.judgingserver.dto.CompileDto;
+import com.example.judgingserver.dto.FeginJudgeDto;
 import com.example.judgingserver.dto.ExecDto;
 
 /**
@@ -8,6 +8,6 @@ import com.example.judgingserver.dto.ExecDto;
  */
 public interface JudgeExec {
 
-    ExecDto Exec(CompileDto dto);
+    FeginJudgeDto Exec(FeginJudgeDto dto);
 
 }

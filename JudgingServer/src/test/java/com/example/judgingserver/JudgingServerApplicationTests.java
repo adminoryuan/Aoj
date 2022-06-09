@@ -3,9 +3,9 @@ package com.example.judgingserver;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.judgingserver.dto.CompieDto;
+import com.example.judgingserver.Server.JudgeServer;
 import com.example.judgingserver.Server.GoJudgServer;
-import com.example.judgingserver.Server.Impl.JudgeCompile;
+import com.example.judgingserver.dto.ProblemDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -82,22 +82,24 @@ class JudgingServerApplicationTests {
         jsonObject.put(key,val);
         return jsonObject;
     }
+
+    @Autowired
+    JudgeServer jserver;
     @Test
     public void TestJSon(){
-        JudgeCompile compileConfig = JudgeCompile.JAVA;
-        CompieDto build = CompieDto.builder()
-                .arge(new String[]{compileConfig.get_cpath(), compileConfig.get_arge()})
-                .env(new String[]{compileConfig.get_env()})
-                .files(new JSONObject[]{buildJsonObject("content", ""), buildJsonObject("name", "stdout")})
-                .cpuLimit("10000000000")
-                .memoryLimit("104857600")
-                .procLimit("50")
-                .copyin(buildJsonObject("a.cc", buildJsonObject("content", "code")))
-                .copyOut(new String[]{"stdout", "stderr"})
-                .copyOutCached(new String[]{"a.cc", "a"})
-                .copyOutDir("1").build();
-        String s = JSON.toJSONString(build);
-        System.out.println(s);
+        ProblemDto dto=new ProblemDto();
+        dto.setCodeLuange("Java");
+        dto.setCode("\n" +
+                "public class Main{\n" +
+                "    public static void main(String[] args) {\n" +
+                "        System.out.println(\"hello\");\n" +
+                "    }\n" +
+                "}");
+        jserver.Judge(dto);
+
+
+
+
     }
 
 }
