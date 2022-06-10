@@ -8,6 +8,6 @@ import com.example.judgingserver.dto.ExecDto;
  */
 public interface JudgeExec {
 
-    FeginJudgeDto Exec(FeginJudgeDto dto);
+    FeginJudgeDto Exec(FeginJudgeDto dto,String in);
 
 }

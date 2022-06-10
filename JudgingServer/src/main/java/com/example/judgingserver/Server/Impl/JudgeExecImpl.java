@@ -20,14 +20,14 @@ public class JudgeExecImpl implements JudgeExec {
 
 
     @Override
-    public FeginJudgeDto Exec(FeginJudgeDto dto) {
+    public FeginJudgeDto Exec(FeginJudgeDto dto,String in) {
         String fileName = dto.getFilds().keySet().iterator().next();
         String FidId=dto.getFilds().get(fileName);
         CompieRequestDto cRequ = CompieRequestDto.builder()
                 .args(BuildJsonArgs.BuildStrArr(fileName))
                 .env(BuildJsonArgs.BuildStrArr("PATH=/usr/bin:/bin"))
                 .files(BuildJsonArgs.BuildJsonObject(
-                        BuildJsonArgs.BuildJsonObject("content", "1 1"),
+                        BuildJsonArgs.BuildJsonObject("content", in),
                         BuildJsonArgs.BuildJsonObject("name","stdout","max",10240),
                         BuildJsonArgs.BuildJsonObject("name","stderr","max",10240)
                 ))
@@ -43,9 +43,7 @@ public class JudgeExecImpl implements JudgeExec {
 
         FeginJudgeDto compileDto = new FeginJudgeDto();
 
-        if (!compileDto.JsonToJudge(res)){
-            return null;
-        }
+        compileDto.JsonToJudge(res);
 
         return compileDto;
     }

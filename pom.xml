@@ -17,7 +17,7 @@
 
     <modules>
         <module>JudgingServer</module>
-        <module>practice_hd</module>
+        <module>api</module>
     </modules>
 
     <dependencies>

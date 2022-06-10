@@ -89,17 +89,13 @@ class JudgingServerApplicationTests {
     public void TestJSon(){
         ProblemDto dto=new ProblemDto();
         dto.setCodeLuange("Java");
-        dto.setCode("\n" +
-                "public class Main{\n" +
+        dto.setCode("public class main{\n" +
                 "    public static void main(String[] args) {\n" +
                 "        System.out.println(\"hello\");\n" +
                 "    }\n" +
                 "}");
         jserver.Judge(dto);
-
-
-
-
     }
 
 }
+

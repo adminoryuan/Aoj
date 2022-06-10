@@ -22,14 +22,19 @@ public class JudgeCompileImpl implements JudgeCompile {
     @Override
     public FeginJudgeDto Compile(ProblemDto problem) {
 
-        JudgeCompileEnum compileConfig=JudgeCompileEnum.CompileEnum(problem.getCodeLuange());
+        JudgeCompileConfig compileConfig=JudgeCompileConfig.CompileEnum(problem.getCodeLuange());
+
         JSONObject jsonObject = new JSONObject();
+        if (compileConfig==null){
+            return null;
+        }
+
         jsonObject.put("","");
         CompieRequestDto build = CompieRequestDto.builder()
                 .args(compileConfig.getArge())
                 .env(new String[]{compileConfig.getEnv()})
                 .files(BuildJsonArgs.BuildJsonObject(
-                        buildJsonObject("content", ""),
+                        buildJsonObject("content", problem.getIn()),
                         BuildJsonArgs.BuildJsonObject("name","stdout","max",10240),
                         BuildJsonArgs.BuildJsonObject("name","stderr","max",10240)
                 ))
@@ -38,7 +43,7 @@ public class JudgeCompileImpl implements JudgeCompile {
                 .procLimit(50l)
                 .copyin(buildJsonObject(compileConfig.getFilename(), buildJsonObject("content", problem.getCode())))
                 .copyOut(new String[]{"stdout", "stderr"})
-                .copyOutCached(new String[]{ compileConfig.getFilename(),"a" })
+                .copyOutCached(compileConfig.getChche())
                 .copyOutDir("1").build();
 
 
@@ -48,9 +53,7 @@ public class JudgeCompileImpl implements JudgeCompile {
 
         System.out.println(compileRes);
         FeginJudgeDto compileDto = new FeginJudgeDto();
-        if (!compileDto.JsonToJudge(compileRes)){
-            return null;
-        }
+        compileDto.JsonToJudge(compileRes);
 
         return compileDto;
     }

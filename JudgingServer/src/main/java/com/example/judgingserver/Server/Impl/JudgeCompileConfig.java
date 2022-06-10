@@ -11,18 +11,27 @@ import org.springframework.stereotype.Component;
 
 
 @Getter
-public enum JudgeCompileEnum {
+public enum JudgeCompileConfig {
 
-    JAVA("Java","/usr/bin/javac",new String[]{"main.java", "-o", "a"},"main.java","PATH=/usr/bin:/bin"),
-    G加加("C++","/usr/bin/g++",new String[]{"/usr/bin/g++","a.cc", "-o", "a"},"a.cc","PATH=/usr/bin:/bin");
+    JAVA(false,"Java","/usr/bin/java",new String[]{"/usr/bin/java","main.java"},"main.java","PATH=/usr/bin:/bin",new String[]{"main.java"}),
+
+    CPP(true,"C++","/usr/bin/g++",new String[]{"/usr/bin/g++","a.cc", "-o", "a"},"a.cc","PATH=/usr/bin:/bin",new String[]{"a","a.cc","a"}),
+
+    Python(false,"Python3","/usr/bin/python3",new String[]{"/usr/bin/python3","a.py"},"a.py","PATH=/usr/bin:/bin",new String[]{"a.py"}),
+
+    C(true,"C","/usr/bin/gcc",new String[]{"/usr/bin/gcc","test.c","-o","c.out"},"test.c","PATH=/usr/bin:/bin",new String[]{"c.out","test.c"});
 
    private String lug;
    private String cpath;
    private String[] arge;
    private String env;
    private String filename;
-    private JudgeCompileEnum(String lug,String cpath,String[] args,String filename,String env){
+   private boolean IsRun;
+   private String[] chche;
+    private JudgeCompileConfig(boolean IsRun,String lug,String cpath,String[] args,String filename,String env,String[] Cache){
         this.filename=filename;
+        this.IsRun=IsRun;
+        this.chche=Cache;
         this.lug=lug;
         this.cpath=cpath;
         this.arge=args;
@@ -34,10 +43,10 @@ public enum JudgeCompileEnum {
 
 
 
-    public static JudgeCompileEnum CompileEnum( String luange){
-        JudgeCompileEnum[] values = values();
-        JudgeCompileEnum compileConfig=null;
-        for (JudgeCompileEnum value : values) {
+    public static JudgeCompileConfig CompileEnum( String luange){
+        JudgeCompileConfig[] values = values();
+        JudgeCompileConfig compileConfig=null;
+        for (JudgeCompileConfig value : values) {
             if (value.getLug().equals(luange)){
                 compileConfig=value;
                 break;

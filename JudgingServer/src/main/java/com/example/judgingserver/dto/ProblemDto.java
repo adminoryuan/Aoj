@@ -16,4 +16,9 @@ public class ProblemDto {
     @JsonProperty("CodeLuange")
     String CodeLuange;
 
+    @JsonProperty("In")
+    String In;
+
+    @JsonProperty("Answer")
+    String Answer;
 }

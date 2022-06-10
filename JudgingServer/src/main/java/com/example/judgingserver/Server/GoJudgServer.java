@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "gooj",url = "127.0.0.1:5050")
+@FeignClient(value = "gooj",url = "120.48.61.75:5050")
 public interface GoJudgServer {
 
     @RequestMapping(value = "/run",method = RequestMethod.POST)

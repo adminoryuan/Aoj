@@ -8,12 +8,13 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class JudgResult {
+public class JudgResultDto {
+
 
     /**
      * 评测状态
      */
-    String Statue;
+    String JudgeStatue;
 
     /**
      * 使用内存
@@ -30,4 +31,5 @@ public class JudgResult {
      */
     String stdout;
 
+    String JudgeBody;
 }

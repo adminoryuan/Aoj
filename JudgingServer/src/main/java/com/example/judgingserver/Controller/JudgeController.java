@@ -1,14 +1,17 @@
 package com.example.judgingserver.Controller;
 
+import com.example.judgingserver.Server.Impl.AbstJudgeServer;
 import com.example.judgingserver.Server.JudgeServer;
-import com.example.judgingserver.dto.JudgResult;
+import com.example.judgingserver.comon.Result;
+import com.example.judgingserver.dto.JudgResultDto;
 import com.example.judgingserver.dto.ProblemDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * Judge接口
@@ -16,16 +19,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JudgeController {
     @Autowired
-    JudgeServer server;
+    @Qualifier("JudgeSumbitServerImpl")
+    AbstJudgeServer SumbitServer;
 
 
-    @PostMapping("/QJudge")
-    public JudgResult Judge(@RequestBody ProblemDto problem){
-        return server.Judge(problem);
+    @Autowired
+    @Qualifier("JudgeSelfServer1")
+    AbstJudgeServer SelfServer;
+
+    /**
+     * 自测接口
+     * @param problem
+     * @return
+     */
+    @PostMapping("/SlftJudge")
+    public Result Judge(@RequestBody ProblemDto problem){
+        JudgResultDto judge = SelfServer.Judge(problem);
+
+        if (judge==null){
+            return Result.failed(10001,"服务器错误",judge);
+        }
+        return Result.ok(judge);
     }
 
-    @PostMapping("/Judge")
-    public JudgResult Judge1(){
-        return new JudgResult();
+
+    @PostMapping("/SubJudge")
+    public Result JudgeSubmit(@RequestBody ProblemDto problemDto){
+        JudgResultDto judge = SumbitServer.Judge(problemDto);
+
+        if (judge==null){
+            return Result.failed(10001,"服务器错误",judge);
+        }
+        return Result.ok(judge);
     }
 }

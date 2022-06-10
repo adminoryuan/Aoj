@@ -32,32 +32,26 @@ public class FeginJudgeDto {
      * @param json
      * @return
      */
-    public  boolean JsonToJudge(String json){
-        try {
+    public  void JsonToJudge(String json){
 
-            JSONArray objects = JSON.parseArray(json);
+        JSONArray objects = JSON.parseArray(json);
 
-            JSONObject parse = JSON.parseObject(objects.get(0).toString());
+        JSONObject parse = JSON.parseObject(objects.get(0).toString());
 
-            this.exitStatus=parse.getString("exitStatus");
+        this.exitStatus=parse.getString("exitStatus");
 
-            this.status=parse.getString("status");
-            this.runTime=parse.getLong("runTime");
-            this.memory= parse.getLong("memory");
+        this.status=parse.getString("status");
+        this.runTime=parse.getLong("runTime");
+        this.memory= parse.getLong("memory");
 
-            JSONObject files = JSON.parseObject(parse.getString("files"));
+        JSONObject files = JSON.parseObject(parse.getString("files"));
 
-            this.stdout=files.getString("stdout");
+        this.stdout=files.getString("stdout");
 
-            this.stderr=files.getString("stderr");
+        this.stderr=files.getString("stderr");
 
-            this.Filds=JSON.parseObject(parse.getString("fileIds"),new HashMap<String,String>().getClass());
+        this.Filds=JSON.parseObject(parse.getString("fileIds"),new HashMap<String,String>().getClass());
 
-        }
-        catch (Exception e){
-            System.out.println(e.toString());
-            return false;
-        }
-        return true;
+
     }
 }
