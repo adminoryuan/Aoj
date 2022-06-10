@@ -16,18 +16,18 @@ public class CodeGenerator {
 
 
     // 数据库连接字段配置
-    private static final String JDBC_URL = "jdbc:mysql://120.48.61.75:3306/practice?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSl=true";
+    private static final String JDBC_URL = "jdbc:mysql://120.48.61.75:3306/OjBase?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSl=true";
     private static final String JDBC_USER_NAME = "root";
-    private static final String JDBC_PASSWORD = "123456";
+    private static final String JDBC_PASSWORD = "123hh456";
 
     // 包名和模块名
     private static final String PACKAGE_NAME = "com.practice";
 
     // 表名,多个表使用英文逗号分割
-    private static final String[] TBL_NAMES = { "practice_problem" ,"sheet","subject"};
+    private static final String[] TBL_NAMES = { "ojbase_problem","ojbase_recode","ojbase_testdata","ojbase_User" };
 
     // 表名的前缀,从表生成代码时会去掉前缀
-    private static final String TABLE_PREFIX = "practice_";
+    private static final String TABLE_PREFIX = "ojbase_";
 
 
 
