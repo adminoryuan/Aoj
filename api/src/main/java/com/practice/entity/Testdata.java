@@ -17,7 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("ojbase_testdata")
+@TableName("ojbase_Judgedata")
 @ApiModel(value = "Testdata对象", description = "")
 public class Testdata {
 

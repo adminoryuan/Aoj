@@ -2,7 +2,7 @@ package com.practice.config.Security;
 
 import com.alibaba.fastjson.JSON;
 import com.practice.common.Result;
-import com.practice.pojo.Userdto;
+import com.practice.pojo.Dto.Userdto;
 import com.practice.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

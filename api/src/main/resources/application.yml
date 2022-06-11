@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123hh456
-    url: jdbc:mysql://120.48.61.75:3306/practice?serverTimezone=GMT%2B8
+    url: jdbc:mysql://120.48.61.75:3306/OjBase?serverTimezone=GMT%2B8
   mail:
     default-encoding: utf-8
     host: smtp.qq.com

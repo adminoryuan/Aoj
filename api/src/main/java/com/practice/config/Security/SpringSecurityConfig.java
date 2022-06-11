@@ -41,6 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-resources/**").anonymous()
                 .antMatchers("/webjars/**").anonymous()
                 .antMatchers("/*/api-docs").anonymous()
+                .antMatchers("/problem/*").anonymous()
                 .anyRequest().authenticated() // 所有请求都需要验证
                 .and()
                 .formLogin()

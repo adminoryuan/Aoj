@@ -1,16 +1,16 @@
 package com.practice.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.practice.common.Result;
 import com.practice.entity.User;
-import com.practice.pojo.Userdto;
-import com.practice.service.user.AbstSendverCode;
-import com.practice.service.user.UserService;
+import com.practice.pojo.Dto.Userdto;
+import com.practice.service.AbstSendverCode;
+import com.practice.service.UserService;
 import com.practice.utils.CheckCodeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,6 +62,7 @@ public class LoginController {
      * @return
      */
     @GetMapping("/sendEmail")
+
     public Result sendEmial(HttpServletRequest request,
                             HttpServletResponse response,
                             @RequestParam String Code,
@@ -116,18 +117,17 @@ public class LoginController {
             return Result.failed("验证码错误!!");
         }
 
-        String token = service.Login(data);
+        String token = service.Signel(data);
         if (token != null) {
-            User username = service.getOne(new QueryWrapper<User>().eq("username", data.getCode()));
-            username.setToken(token);
-            return Result.ok(200, "登录成功", username);
+
+            return Result.ok(200, "登录成功", token);
         }
         return Result.failed("账号或者密码错误");
     }
 
 
     @PostMapping("/Regist")
-    public Result SaveUser(@RequestBody User user
+    public Result SaveUser(@RequestBody Userdto user
             , HttpServletRequest req) {
         HttpSession session = req.getSession();
 
@@ -136,26 +136,26 @@ public class LoginController {
             return Result.failed("请输入正确的验证码");
         }
 
-        if (!user.getUsername().equals(session.getAttribute("EmailCode").toString().split("-")[1])) {
+        if (!user.getEmail().equals(session.getAttribute("EmailCode").toString().split("-")[1])) {
             return Result.failed("年轻人不要胡乱测试！！！");
         }
 //        boolean register = service.register(user);
         User username = service.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
-        User ic_card = service.getOne(new QueryWrapper<User>().eq("ic_card", user.getIdCard()));
+        //User ic_card = service.getOne(new QueryWrapper<User>().eq("ic_card", user.getIdCard()));
         User email = service.getOne(new QueryWrapper<User>().eq("email", user.getEmail()));
-        User phone = service.getOne(new QueryWrapper<User>().eq("phone", user.getPhone()));
+      //  User phone = service.getOne(new QueryWrapper<User>().eq("phone", user.getPhone()));
         if (null != username) {
             return Result.failed("该用户名已被注册");
         }
-        if (null != ic_card) {
-            return Result.failed("该身份证已被注册");
-        }
+//        if (null != ic_card) {
+//            return Result.failed("该身份证已被注册");
+//        }
         if (null != email) {
             return Result.failed("该邮箱已被注册");
         }
-        if (null != phone) {
-            return Result.failed("该电话已被注册");
-        }
+//        if (null != phone) {
+//            return Result.failed("该电话已被注册");
+//        }
         service.saveOrUpdate(user);
         return Result.ok("注册成功");
 

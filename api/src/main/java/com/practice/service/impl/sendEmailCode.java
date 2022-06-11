@@ -1,6 +1,6 @@
-package com.practice.service.user.impl;
+package com.practice.service.impl;
 
-import com.practice.service.user.AbstSendverCode;
+import com.practice.service.AbstSendverCode;
 import com.practice.utils.EmailCompent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
