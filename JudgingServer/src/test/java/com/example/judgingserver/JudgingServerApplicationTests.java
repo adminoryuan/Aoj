@@ -6,9 +6,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.judgingserver.Server.JudgeServer;
 import com.example.judgingserver.Server.GoJudgServer;
 import com.example.judgingserver.dto.ProblemDto;
+import com.example.judgingserver.untity.RedisUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Map;
 
 @SpringBootTest
 class JudgingServerApplicationTests {
@@ -97,5 +100,14 @@ class JudgingServerApplicationTests {
         jserver.Judge(dto);
     }
 
+
+    @Autowired
+    RedisUtils utils;
+
+    @Test
+    public void TestJudge(){
+        Map<Object, Object> judHash = utils.hashGetAll("JudHash");
+
+    }
 }
 
