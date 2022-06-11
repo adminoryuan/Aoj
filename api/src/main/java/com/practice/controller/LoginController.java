@@ -88,7 +88,7 @@ public class LoginController {
 
         session.setAttribute("EmailCode", sendCode + "-" + email);
 
-        session.setMaxInactiveInterval(6);
+        session.setMaxInactiveInterval(60);
 
         return Result.ok("邮件发送成功");
     }
@@ -120,7 +120,7 @@ public class LoginController {
         String token = service.Signel(data);
         if (token != null) {
 
-            return Result.ok(200, "登录成功", token);
+            return Result.ok(0, "登录成功", token);
         }
         return Result.failed("账号或者密码错误");
     }
@@ -131,7 +131,7 @@ public class LoginController {
             , HttpServletRequest req) {
         HttpSession session = req.getSession();
 
-        System.out.println(session.getAttribute("EmailCode").toString());
+//        System.out.println(session.getAttribute("EmailCode").toString());
         if (session.getAttribute("EmailCode") == null || !session.getAttribute("EmailCode").toString().split("-")[0].equals(user.getCode())) {
             return Result.failed("请输入正确的验证码");
         }
