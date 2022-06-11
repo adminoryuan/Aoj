@@ -42,16 +42,16 @@ public class ProblemController {
 
     @GetMapping("/getProblem")
     @ApiOperation("获取详细数据")
-    public Result getProblem(@RequestParam  String proid){
+    public Result getProblem(@RequestParam  Integer proid){
 
-        return Result.ok(service.getOne(new QueryWrapper<Problem>().eq("id",proid)));
+        return Result.ok(service.getProblemOne(proid));
     }
     @PostMapping("/upProblem")
     @ApiOperation("修改题目")
     public Result UpProblem(@RequestBody ProblemDto dto){
         dto.setUserid(1);
 
-        if (!service.updateById(dto)){
+        if (! service.UpProblyem(dto)){
             return Result.failed("修改失败 请稍后在试试");
         }
         return Result.ok("修改成功");

@@ -19,6 +19,6 @@ import java.util.List;
 public interface ProblemMapper extends BaseMapper<Problem> {
 
 
-    @Select("select A.Name,b.id,b.create_time,b.subDetailed,b.subLevel,b.tag from ojbase_User A inner join ojbase_problem b ON A.id=b.userid")
+    @Select("select A.Name,b.id,b.create_time,b.subDetailed,b.subLevel,b.tag from ojbase_User A inner join ojbase_problem b ON A.id=b.userid limit #{page},#{size}")
     List<ProUserVo> getProAll(@Param("page") int page,@Param("size") int size);
 }

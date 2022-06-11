@@ -23,24 +23,5 @@ public class JudgeSelfServerImpl extends AbstJudgeServer {
         return super.ExecCoding(problemDto);
     }
 
-    @Override
-    protected boolean JudgeAnsert(String out, ProblemDto problem) {
-        {
-            if (problem.getAnswer()==null){
-                problem.setAnswer("");
-            }
-            String[] s = out.split(" ");
-            String[] s1 = problem.getAnswer().split(" ");
 
-            if (s.length!=s1.length)return false;
-
-            int index=0;
-
-            while (index<s.length){
-                if (!s[index].equals(s1[index])) return false;
-                index++;
-            }
-            return true;
-        }
-    }
 }

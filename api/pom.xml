@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <parent>
-        <artifactId>ParHd</artifactId>
+        <artifactId>Aoj</artifactId>
         <groupId>org.example</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -41,11 +41,7 @@
         </dependency>
 
         <!-- mybatis-plus 所需依赖  -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.baomidou</groupId>

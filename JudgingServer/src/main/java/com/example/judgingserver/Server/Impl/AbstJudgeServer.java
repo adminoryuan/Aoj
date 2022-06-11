@@ -32,7 +32,7 @@ public abstract class AbstJudgeServer implements JudgeServer {
 
         try {
             if (compile.getStatus().equals("Accepted") && JudgeCompileConfig.CompileEnum(problemDto.getCodeLuange()).isIsRun()) {
-                FeginJudgeDto exec = this.exec.Exec(compile, problemDto.getIn());
+                FeginJudgeDto exec = this.exec.Exec(problemDto);
                 result.setJudgeStatue(exec.getStatus());
                 result.setMemorySize(exec.getMemory());
                 result.setExectime(exec.getRunTime());
@@ -57,7 +57,7 @@ public abstract class AbstJudgeServer implements JudgeServer {
         }
 
 
-        if (JudgeAnsert(result.getStdout(),problemDto)){
+        if (JudgeAnsert(result.getStdout(),problemDto.getAnswer())){
             result.setJudgeStatue(Correct);
         }else {
             result.setJudgeStatue(Wring);
@@ -66,7 +66,22 @@ public abstract class AbstJudgeServer implements JudgeServer {
     }
 
 
-    protected abstract boolean JudgeAnsert(String out,ProblemDto anser);
+    private boolean JudgeAnsert(String out, String Answer) {
+        {
+            String[] s = out.split(" ");
+            String[] s1 = Answer.split(" ");
+
+            if (s.length!=s1.length)return false;
+
+            int index=0;
+
+            while (index<s.length){
+                if (!s[index].equals(s1[index])) return false;
+                index++;
+            }
+            return true;
+        }
+    }
 
 
 }

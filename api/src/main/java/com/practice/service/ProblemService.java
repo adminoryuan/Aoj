@@ -21,4 +21,6 @@ public interface ProblemService extends IService<Problem> {
 
     List<ProUserVo> getProAll(int page,int size);
 
+    Problem getProblemOne(Integer id);
+    boolean UpProblyem(ProblemDto Problem);
 }

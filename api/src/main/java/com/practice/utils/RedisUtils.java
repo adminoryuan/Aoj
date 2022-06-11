@@ -308,7 +308,7 @@ public class RedisUtils {
      * @param key
      * @param value
      */
-    public boolean hashPutOne(String mapName, String key, String value) {
+    public boolean hashPutOne(String mapName, String key, Object value) {
         try {
             redisTemplate.opsForHash().put(mapName, key, value);
             return true;

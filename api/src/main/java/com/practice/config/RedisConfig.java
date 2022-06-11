@@ -26,7 +26,7 @@ public class RedisConfig {
         // Hash key序列化
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         // Hash value序列化
-        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(new FastJsonRedisSerializer<>(Object.class));
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         return redisTemplate;
     }

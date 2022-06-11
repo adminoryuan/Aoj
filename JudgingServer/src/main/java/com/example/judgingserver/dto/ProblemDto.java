@@ -6,6 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
+/**
+ * 保存题和题的测试数据
+ */
 public class ProblemDto {
 
     int Pid;
@@ -21,4 +24,9 @@ public class ProblemDto {
 
     @JsonProperty("Answer")
     String Answer;
+
+    long RunTime;
+
+    long MemorySize;
+
 }
