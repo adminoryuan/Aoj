@@ -3,7 +3,8 @@ package com.practice.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.practice.common.Result;
 import com.practice.entity.User;
-import com.practice.pojo.Dto.Userdto;
+import com.practice.pojo.Dto.Logindto;
+import com.practice.pojo.Vo.UserVO;
 import com.practice.service.AbstSendverCode;
 import com.practice.service.UserService;
 import com.practice.utils.CheckCodeUtil;
@@ -109,7 +110,7 @@ public class LoginController {
 
 
     @PostMapping("/Sigle")
-    public Result Login(@Validated @RequestBody Userdto data,
+    public Result Login(@Validated @RequestBody Logindto data,
                         HttpServletRequest request) {
         HttpSession session = request.getSession();
 
@@ -117,17 +118,19 @@ public class LoginController {
             return Result.failed("验证码错误!!");
         }
 
-        String token = service.Signel(data);
-        if (token != null) {
+        UserVO userVO = service.Signel(data);
 
-            return Result.ok(0, "登录成功", token);
+
+        if (userVO != null) {
+
+            return Result.ok(0, "登录成功", userVO);
         }
         return Result.failed("账号或者密码错误");
     }
 
 
     @PostMapping("/Regist")
-    public Result SaveUser(@RequestBody Userdto user
+    public Result SaveUser(@RequestBody Logindto user
             , HttpServletRequest req) {
         HttpSession session = req.getSession();
 

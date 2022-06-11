@@ -2,7 +2,7 @@ package com.practice.config.Security;
 
 import com.alibaba.fastjson.JSON;
 import com.practice.common.Result;
-import com.practice.pojo.Dto.Userdto;
+import com.practice.pojo.Dto.Logindto;
 import com.practice.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -64,7 +64,7 @@ public class TokenAuthenticationTokenFilter extends OncePerRequestFilter {
         authorities.add(new SimpleGrantedAuthority(Values.get("role").toString()));
 
 
-        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(new Userdto(), null, authorities);
+        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(new Logindto(), null, authorities);
 
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 

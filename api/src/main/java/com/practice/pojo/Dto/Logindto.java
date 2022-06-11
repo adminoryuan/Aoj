@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
 //@Data
-public class Userdto extends User {
+public class Logindto extends User {
 
    @JsonProperty("Code")
    @NotBlank(message = "验证码不为空")

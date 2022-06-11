@@ -3,7 +3,8 @@ package com.practice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.practice.entity.User;
 import com.practice.mapper.UserMapper;
-import com.practice.pojo.Dto.Userdto;
+import com.practice.pojo.Dto.Logindto;
+import com.practice.pojo.Vo.UserVO;
 import com.practice.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.practice.utils.RedisUtils;
@@ -42,11 +43,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public String Signel(User user) {
+    public UserVO Signel(User user) {
 
         User user1 = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()).eq("password", user.getPassword()));
         if (user1==null) return null;
-        return CreteToken(user1);
+
+        String token = CreteToken(user1);
+        return new UserVO(user1.getName(),token);
     }
 
     /**
@@ -57,7 +60,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public String CreteToken(User u){
         String token= UUID.randomUUID().toString();
 
-        Userdto userdto=new Userdto();
+        Logindto userdto=new Logindto();
         userdto.setRole("ROLE_ADMIN");
         userdto.setUserName(u.getUsername());
         userdto.setPassword(u.getPassword());
