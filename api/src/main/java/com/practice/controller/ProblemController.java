@@ -25,33 +25,46 @@ import java.util.List;
 @Api(value = "ProblemController", description = "获取题目接口")
 @RestController
 
-@PreAuthorize("ADMIN")
 @RequestMapping("/problem")
 public class ProblemController {
 
     @Autowired
     ProblemService service;
 
-    @PostMapping("/getProbleAll")
+    @GetMapping("/getProbleAll")
     @ApiOperation("获取问题列表")
     public Result getProbleAll(@RequestParam int page,@RequestParam int size){
-        return Result.ok(service.list());
+        if (page<0){
+            return Result.failed("条件错误！");
+        }
+        return Result.ok(service.getProAll(page,size));
     }
 
-    @PostMapping("/getProblem")
+    @GetMapping("/getProblem")
     @ApiOperation("获取详细数据")
     public Result getProblem(@RequestParam  String proid){
+
         return Result.ok(service.getOne(new QueryWrapper<Problem>().eq("id",proid)));
+    }
+    @PostMapping("/upProblem")
+    @ApiOperation("修改题目")
+    public Result UpProblem(@RequestBody ProblemDto dto){
+        dto.setUserid(1);
+
+        if (!service.updateById(dto)){
+            return Result.failed("修改失败 请稍后在试试");
+        }
+        return Result.ok("修改成功");
     }
 
 
     @PostMapping("/addPromblem")
     @ApiOperation("添加题目")
     public Result addProblem(@RequestBody ProblemDto dto){
+        dto.setUserid(1);
         if (service.AddProblem(dto)){
             return Result.failed("请填写正确的数据");
         }
-
         return Result.ok("成功");
     }
 

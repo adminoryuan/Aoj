@@ -4,6 +4,7 @@ import com.practice.entity.Problem;
 import com.practice.entity.Testdata;
 import com.practice.mapper.ProblemMapper;
 import com.practice.pojo.Dto.ProblemDto;
+import com.practice.pojo.Vo.ProUserVo;
 import com.practice.service.ProblemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,14 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem> impl
         }
 
         return false;
+    }
+
+
+    @Override
+    public List<ProUserVo> getProAll(int page,int size) {
+        System.out.println(page);
+        System.out.println((page-1)*size);
+        return this.getBaseMapper().getProAll((page-1)*size,size);
     }
 
 

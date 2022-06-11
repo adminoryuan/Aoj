@@ -3,6 +3,7 @@ package com.practice.service;
 import com.practice.entity.Problem;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.practice.pojo.Dto.ProblemDto;
+import com.practice.pojo.Vo.ProUserVo;
 
 import java.util.List;
 
@@ -18,5 +19,6 @@ public interface ProblemService extends IService<Problem> {
 
     boolean AddProblem(ProblemDto dto);
 
+    List<ProUserVo> getProAll(int page,int size);
 
 }
