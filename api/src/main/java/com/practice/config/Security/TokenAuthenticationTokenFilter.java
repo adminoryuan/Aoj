@@ -61,7 +61,7 @@ public class TokenAuthenticationTokenFilter extends OncePerRequestFilter {
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
-        authorities.add(new SimpleGrantedAuthority(Values.get("role").toString()));
+        authorities.add(new SimpleGrantedAuthority(Values.get("ROLE").toString()));
 
 
         UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(new Logindto(), null, authorities);

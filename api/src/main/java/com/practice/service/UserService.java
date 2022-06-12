@@ -2,6 +2,7 @@ package com.practice.service;
 
 import com.practice.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.practice.pojo.Dto.Logindto;
 import com.practice.pojo.Vo.UserVO;
 
 /**
@@ -14,8 +15,8 @@ import com.practice.pojo.Vo.UserVO;
  */
 public interface UserService extends IService<User> {
 
-    UserVO Signel(User userdto);
+    UserVO Signel(Logindto userdto);
 
 
-    boolean Regist(User userdto);
+    boolean Regist(Logindto userdto);
 }

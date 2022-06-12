@@ -107,7 +107,10 @@ class JudgingServerApplicationTests {
     @Test
     public void TestJudge(){
         Map<Object, Object> judHash = utils.hashGetAll("JudHash");
-
+        for (Object o : judHash.keySet()) {
+            System.out.println(o.toString());
+            System.out.println(judHash.get(o));
+        }
     }
 }
 

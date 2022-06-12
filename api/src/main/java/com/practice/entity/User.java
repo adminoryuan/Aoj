@@ -34,12 +34,24 @@ public class User {
     @TableField("`password`")
     private String password;
 
+    @TableField("ROLE")
+    private String ROLE;
+
+
     @JsonProperty("Email")
     @TableField("`Email`")
     private String Email;
 
+    public void setROLE(String ROLE) {
+        this.ROLE = ROLE;
+    }
+
+    public String getROLE() {
+        return ROLE;
+    }
+
     @TableField("Name")
-   private String Name;
+    private String Name;
 
     @TableField("`Phone`")
    private String Phone;

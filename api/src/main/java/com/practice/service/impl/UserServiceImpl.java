@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.practice.entity.User;
 import com.practice.mapper.UserMapper;
 import com.practice.pojo.Dto.Logindto;
+import com.practice.pojo.Dto.Tokendto;
 import com.practice.pojo.Vo.UserVO;
 import com.practice.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.practice.utils.RedisUtils;
+import com.practice.utils.MD5Utils;
+import com.practice.utils.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 /**
  * <p>
@@ -25,11 +25,12 @@ import java.util.UUID;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
-    RedisUtils redisUtils;
+    TokenManager tokenManager;
 
     @Override
-    public boolean Regist(User user) {
+    public boolean Regist(Logindto user) {
         User getUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
+        user.setROLE("ROLE_USER");
         if (null != getUser) {
             return false;
         } else {
@@ -43,32 +44,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public UserVO Signel(User user) {
+    public UserVO Signel(Logindto userDto) {
 
-        User user1 = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()).eq("password", user.getPassword()));
+        User user1 = this.getOne(new QueryWrapper<User>().eq("username", userDto.getUsername()).eq("password", userDto.getPassword()));
         if (user1==null) return null;
 
-        String token = CreteToken(user1);
+        String token=tokenManager.getToken(user1);
+
         return new UserVO(user1.getName(),token);
     }
 
-    /**
-     * 生产一个token
-     * @param u
-     * @return
-     */
-    public String CreteToken(User u){
-        String token= UUID.randomUUID().toString();
 
-        Logindto userdto=new Logindto();
-        userdto.setRole("ROLE_ADMIN");
-        userdto.setUserName(u.getUsername());
-        userdto.setPassword(u.getPassword());
-
-
-        redisUtils.set(token,userdto,30*60*60); //设置30分钟过期
-
-
-        return token;
-    }
 }

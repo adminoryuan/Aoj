@@ -1,7 +1,6 @@
 package com.example.judgingserver.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.annotations.ApiModel;
+import com.baomidou.mybatisplus.annotation.*; 
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +17,6 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @TableName("ojbase_problem")
-@ApiModel(value = "Problem对象", description = "")
 public class Problem {
 
     @TableId(value = "id", type = IdType.AUTO)

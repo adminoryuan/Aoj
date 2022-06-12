@@ -11,6 +11,7 @@ import lombok.Setter;
  */
 public class ProblemDto {
 
+    @JsonProperty("Pid")
     int Pid;
 
     @JsonProperty("Code")
@@ -24,6 +25,9 @@ public class ProblemDto {
 
     @JsonProperty("Answer")
     String Answer;
+
+
+    int Userid;
 
     long RunTime;
 

@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.practice.TestRedis
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 23.123 s <<< FAILURE! - in com.practice.TestRedis
-Test  Time elapsed: 2.631 s  <<< ERROR!
-java.lang.NullPointerException
-	at com.practice.TestRedis.Test(TestRedis.java:28)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.261 s - in com.practice.TestRedis

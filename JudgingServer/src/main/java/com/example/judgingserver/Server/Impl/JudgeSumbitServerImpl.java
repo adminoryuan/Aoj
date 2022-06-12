@@ -20,13 +20,14 @@ public class JudgeSumbitServerImpl extends AbstJudgeServer{
 
     @Autowired
     RecodeServiceImpl recodeService;
+
     @Autowired
     RedisUtils utils;
 
 
     @Override
     public JudgResultDto Judge(ProblemDto problemDto) {
-        Object qutHash = utils.hashGetOne("JudHash", problemDto.getPid());
+        Object qutHash = utils.hashGetOne("JudHash",String.valueOf(problemDto.getPid()));
 
         JudgeDatadto judgeDatadto = JSONObject.parseObject(qutHash.toString(), JudgeDatadto.class);
         StringBuilder in=new StringBuilder();
@@ -50,7 +51,8 @@ public class JudgeSumbitServerImpl extends AbstJudgeServer{
          * 记录数据
          */
         Recode recode=new Recode();
-        recode.setUserid(1);
+        recode.setUserid(problemDto.getUserid());
+
         recode.setCode(problemDto.getCode());
         recode.setMemroy(judgResultDto.getMemorySize());
         recode.setRuntime(judgResultDto.getExectime());

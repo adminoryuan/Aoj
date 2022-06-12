@@ -6,15 +6,19 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.servlet.annotation.WebFilter;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
-//@Data
+
+@WebFilter(filterName="FirstFilter",urlPatterns="/first")
 public class Logindto extends User {
+
 
    @JsonProperty("Code")
    @NotBlank(message = "验证码不为空")
    String Code;
+
 
    @JsonProperty("UserName")
    @NotBlank(message = "用户名不为空")

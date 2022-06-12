@@ -32,7 +32,7 @@ public abstract class AbstJudgeServer implements JudgeServer {
 
         try {
             if (compile.getStatus().equals("Accepted") && JudgeCompileConfig.CompileEnum(problemDto.getCodeLuange()).isIsRun()) {
-                FeginJudgeDto exec = this.exec.Exec(problemDto);
+                FeginJudgeDto exec = this.exec.Exec(problemDto,compile);
                 result.setJudgeStatue(exec.getStatus());
                 result.setMemorySize(exec.getMemory());
                 result.setExectime(exec.getRunTime());
