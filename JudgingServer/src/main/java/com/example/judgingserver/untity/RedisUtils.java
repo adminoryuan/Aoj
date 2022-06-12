@@ -616,6 +616,23 @@ public class RedisUtils {
         }
     }
 
+    public Boolean ZSetAdd(String key,Object val,double qz){
+        try {
+            redisTemplate.opsForZSet().add(key, val,qz);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return false;
+        }
+    }
+
+    public Set<Object> getZetALl(String k,double v1, double v2){
+        return  redisTemplate.opsForZSet().rangeByScore(k,v1,v2);
+    }
+
+    public Object addScore(String key, Object obj, double score) {
+        return redisTemplate.opsForZSet().incrementScore(key, obj, score);
+    }
     /**
      * 移除Set集合中的值，支持批量
      *
@@ -734,6 +751,8 @@ public class RedisUtils {
                 .radius(key, name, distances, args);
         return radius;
     }
+
+
 
 
 }

@@ -47,6 +47,7 @@ public class JudgeSumbitServerImpl extends AbstJudgeServer{
 
 
         JudgResultDto judgResultDto = super.ExecCoding(problemDto);
+
         /**
          * 记录数据
          */
@@ -57,6 +58,7 @@ public class JudgeSumbitServerImpl extends AbstJudgeServer{
         recode.setMemroy(judgResultDto.getMemorySize());
         recode.setRuntime(judgResultDto.getExectime());
         recode.setStatus(judgResultDto.getJudgeStatue());
+
         recodeService.save(recode);
 
         return judgResultDto;

@@ -34,10 +34,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (null != getUser) {
             return false;
         } else {
-//            String pwd = MD5Utils.string2MD5(user.getPassword());
-//            User user1=new User();
-//            user1.setPassword(user.getPassword());
-//            user1.setEmail(user.getUsername());
             this.saveOrUpdate(user);
             return true;
         }

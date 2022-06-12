@@ -26,6 +26,7 @@ public class ProblemDto {
     @JsonProperty("Answer")
     String Answer;
 
+    String UserName;
 
     int Userid;
 

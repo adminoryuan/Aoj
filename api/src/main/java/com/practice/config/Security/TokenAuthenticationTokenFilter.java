@@ -3,6 +3,7 @@ package com.practice.config.Security;
 import com.alibaba.fastjson.JSON;
 import com.practice.common.Result;
 import com.practice.pojo.Dto.Logindto;
+import com.practice.pojo.Dto.Tokendto;
 import com.practice.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,14 +55,13 @@ public class TokenAuthenticationTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        Map<String,String> maps=new HashMap<>();
 
-        Map Values = JSON.parseObject(o.toString(), maps.getClass());
+        Tokendto tokendto = JSON.parseObject(o.toString(), Tokendto.class);
 
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
-        authorities.add(new SimpleGrantedAuthority(Values.get("ROLE").toString()));
+        authorities.add(new SimpleGrantedAuthority(tokendto.getROLE().toString()));
 
 
         UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(new Logindto(), null, authorities);

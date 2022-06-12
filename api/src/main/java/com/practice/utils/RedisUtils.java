@@ -9,6 +9,7 @@ import org.springframework.data.geo.GeoResults;
 import org.springframework.data.geo.Point;
 import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -30,6 +31,35 @@ public class RedisUtils {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    public Set<Object> getZetALl(String k,int v1, int v2){
+        return  redisTemplate.opsForZSet().reverseRange(k,v1,v2);
+    }
+
+    /**
+     * 查询集合中指定顺序的值和score，0, -1 表示获取全部的集合内容
+     *
+     * @param key
+     * @param start
+     * @param end
+     * @return
+     */
+    public Set<ZSetOperations.TypedTuple<Object>> rangeWithScore(String key, int start, int end) {
+        return redisTemplate.opsForZSet().rangeWithScores(key, start, end);
+    }
+
+
+    public Boolean ZSetAdd(String key,Object val,double qz){
+        try {
+            redisTemplate.opsForZSet().add(key, val,qz);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return false;
+        }
+    }
+    public Double score(String key, String value) {
+        return redisTemplate.opsForZSet().score(key, value);
+    }
 
 // ##########################【操作String类型】#####################################################
 

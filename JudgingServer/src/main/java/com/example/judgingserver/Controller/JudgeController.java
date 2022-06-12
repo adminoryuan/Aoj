@@ -71,6 +71,8 @@ public class JudgeController {
 
         problemDto.setUserid(logindto.getUserid());
 
+        problemDto.setUserName(logindto.getUserName());
+
         JudgResultDto judge = SumbitServer.Judge(problemDto);
 
         if (judge==null){

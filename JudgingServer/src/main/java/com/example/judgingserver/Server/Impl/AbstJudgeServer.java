@@ -5,6 +5,7 @@ import com.example.judgingserver.Server.JudgeServer;
 import com.example.judgingserver.dto.FeginJudgeDto;
 import com.example.judgingserver.dto.JudgResultDto;
 import com.example.judgingserver.dto.ProblemDto;
+import com.example.judgingserver.manager.RankManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstJudgeServer implements JudgeServer {
@@ -16,6 +17,8 @@ public abstract class AbstJudgeServer implements JudgeServer {
     @Autowired
     JudgeExecImpl exec;
 
+    @Autowired
+    RankManager rankManager;
 
     @Override
     public   abstract JudgResultDto Judge(ProblemDto problemDto);
@@ -58,6 +61,7 @@ public abstract class AbstJudgeServer implements JudgeServer {
 
 
         if (JudgeAnsert(result.getStdout(),problemDto.getAnswer())){
+            rankManager.Rank(problemDto.getUserName());
             result.setJudgeStatue(Correct);
         }else {
             result.setJudgeStatue(Wring);
