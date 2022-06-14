@@ -2,6 +2,7 @@ package com.practice.mapper;
 
 import com.practice.entity.Recode;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>

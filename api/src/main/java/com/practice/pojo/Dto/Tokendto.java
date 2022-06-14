@@ -15,8 +15,7 @@ public class Tokendto {
     int Userid;
 
 
-    @JsonProperty("Code")
-    String Code;
+
 
     @JsonProperty("ROLE")
     String  ROLE;

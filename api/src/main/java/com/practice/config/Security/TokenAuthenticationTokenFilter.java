@@ -64,7 +64,7 @@ public class TokenAuthenticationTokenFilter extends OncePerRequestFilter {
         authorities.add(new SimpleGrantedAuthority(tokendto.getROLE().toString()));
 
 
-        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(new Logindto(), null, authorities);
+        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(tokendto, null, authorities);
 
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 

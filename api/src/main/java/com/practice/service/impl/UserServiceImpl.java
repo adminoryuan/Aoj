@@ -1,10 +1,12 @@
 package com.practice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.practice.entity.User;
 import com.practice.mapper.UserMapper;
 import com.practice.pojo.Dto.Logindto;
 import com.practice.pojo.Dto.Tokendto;
+import com.practice.pojo.Vo.UserOnLineVO;
 import com.practice.pojo.Vo.UserVO;
 import com.practice.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -12,6 +14,8 @@ import com.practice.utils.MD5Utils;
 import com.practice.utils.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -40,6 +44,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    public boolean offonline(Integer userid) {
+
+
+        return tokenManager.OffOnline(userid.toString());
+    }
+
+    @Override
     public UserVO Signel(Logindto userDto) {
 
         User user1 = this.getOne(new QueryWrapper<User>().eq("username", userDto.getUsername()).eq("password", userDto.getPassword()));
@@ -49,6 +60,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         return new UserVO(user1.getName(),token);
     }
+
+    @Override
+    public List<UserOnLineVO> getUserAll(int page, int size) {
+
+
+        List<UserOnLineVO> getall = this.baseMapper.getall(size * (page - 1), size);
+
+
+        tokenManager.getUserOnline(getall);
+        return getall;
+    }
+
+
 
 
 }

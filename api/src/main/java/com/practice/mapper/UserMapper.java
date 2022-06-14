@@ -2,6 +2,11 @@ package com.practice.mapper;
 
 import com.practice.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.practice.pojo.Vo.UserOnLineVO;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +18,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    @Select("SELECT * FROM ojbase_User LIMIT #{page},#{size}")
+    public List<UserOnLineVO> getall(@Param("page") int page,@Param("size") int size);
 }

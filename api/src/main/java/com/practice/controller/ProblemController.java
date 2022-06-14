@@ -24,7 +24,7 @@ import java.util.List;
 
 @Api(value = "ProblemController", description = "获取题目接口")
 @RestController
-
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/problem")
 public class ProblemController {
 

@@ -15,6 +15,7 @@ import java.util.Collection;
 public class Logindto extends User {
 
 
+
    @JsonProperty("Code")
    @NotBlank(message = "验证码不为空")
    String Code;
@@ -28,6 +29,7 @@ public class Logindto extends User {
    @NotBlank(message = "密码不为空")
    String Password;
 
+   int uid;
 
    @Override
    public String toString() {

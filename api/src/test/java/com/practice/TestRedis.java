@@ -3,7 +3,9 @@ package com.practice;
 import com.alibaba.fastjson.JSON;
 import com.practice.pojo.Dto.Logindto;
 import com.practice.pojo.Vo.RankV0;
+import com.practice.pojo.Vo.UserOnLineVO;
 import com.practice.service.RankService;
+import com.practice.service.UserService;
 import com.practice.utils.RedisUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,12 @@ public class TestRedis {
     @Autowired
     RankService Server;
 
+    @Autowired
+    UserService ser;
     @Test
     public void T() throws InterruptedException {
-        utils.ZSetAdd("names","123",2);
+        List<UserOnLineVO> userAll = ser.getUserAll(1, 20);
 
-        Thread.sleep(2000);
-
-        System.out.println(utils.score("names","123"));
 
     }
 }

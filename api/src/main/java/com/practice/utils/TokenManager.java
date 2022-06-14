@@ -2,9 +2,11 @@ package com.practice.utils;
 
 import com.practice.entity.User;
 import com.practice.pojo.Dto.Tokendto;
+import com.practice.pojo.Vo.UserOnLineVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -43,7 +45,7 @@ public class TokenManager {
         tokendto.setUserName(u.getUsername());
         tokendto.setName(u.getName());
 
-        redisUtils.set(s,tokendto,30*60*60);
+        redisUtils.set(s,tokendto,30*60);
         redisUtils.hashPutOne(TokenHashName,u.getId().toString(),s);
 
         return s;
@@ -56,6 +58,33 @@ public class TokenManager {
      */
     private Object IsExitToken(String userid){
         return redisUtils.hashGetOne(TokenHashName, userid);
+    }
+
+
+    public void getUserOnline(List<UserOnLineVO> data){
+        for (UserOnLineVO datum : data) {
+
+            Object o = redisUtils.hashGetOne(TokenHashName, datum.getId().toString());
+
+            if (o!=null) {
+                Object then= redisUtils.get(o.toString());
+                datum.setIsOnLine(then!=null);
+            }else {
+                datum.setIsOnLine(false);
+            }
+        }
+    }
+
+
+    public boolean OffOnline(String userid){
+        Object o = redisUtils.hashGetOne(TokenHashName, userid);
+        if (o==null)return false;
+
+
+        redisUtils.hashDelete(TokenHashName,userid);
+
+        redisUtils.del(o.toString());
+        return true;
     }
 
 }
