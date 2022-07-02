@@ -1,17 +1,17 @@
 package com.practice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.practice.entity.User;
 import com.practice.mapper.UserMapper;
-import com.practice.pojo.Dto.Logindto;
-import com.practice.pojo.Dto.Tokendto;
+import com.practice.pojo.Req.LoginReq;
+import com.practice.pojo.Req.RegistReq;
+
 import com.practice.pojo.Vo.UserOnLineVO;
 import com.practice.pojo.Vo.UserVO;
 import com.practice.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.practice.utils.MD5Utils;
 import com.practice.utils.TokenManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,19 +26,24 @@ import java.util.List;
  * @since 2022-06-10 20:55:13
  */
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
     TokenManager tokenManager;
 
     @Override
-    public boolean Regist(Logindto user) {
-        User getUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
-        user.setROLE("ROLE_USER");
+    public boolean Regist(RegistReq user) {
+        User getUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUserName()));
         if (null != getUser) {
             return false;
         } else {
-            this.saveOrUpdate(user);
+            User user1 = new User();
+            user1.setEmail(user.getEmail());
+            user1.setPassword(user.getPassword());
+            user1.setPhone(user.getPhone());
+            user1.setROLE("ROLE_ADMIN");
+            this.saveOrUpdate(getUser);
             return true;
         }
     }
@@ -46,14 +51,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public boolean offonline(Integer userid) {
 
-
         return tokenManager.OffOnline(userid.toString());
     }
 
     @Override
-    public UserVO Signel(Logindto userDto) {
+    public UserVO Signel(LoginReq userDto) {
 
-        User user1 = this.getOne(new QueryWrapper<User>().eq("username", userDto.getUsername()).eq("password", userDto.getPassword()));
+        User user1 = this.getOne(new QueryWrapper<User>().eq("username", userDto.getUserName()).eq("password", userDto.getPassword()));
         if (user1==null) return null;
 
         String token=tokenManager.getToken(user1);

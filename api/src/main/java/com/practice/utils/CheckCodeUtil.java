@@ -1,5 +1,6 @@
 package com.practice.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
@@ -21,6 +22,8 @@ public class CheckCodeUtil {
 
     public static final String VERIFY_CODES = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static Random random = new Random();
+
+
 
 
 

@@ -1,17 +1,13 @@
 package com.practice.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.practice.common.Result;
-import com.practice.entity.Problem;
-import com.practice.pojo.Dto.ProblemDto;
+import com.practice.pojo.dto.ProblemDto;
 import com.practice.service.ProblemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
@@ -46,6 +42,7 @@ public class ProblemController {
 
         return Result.ok(service.getProblemOne(proid));
     }
+
     @PostMapping("/upProblem")
     @ApiOperation("修改题目")
     public Result UpProblem(@RequestBody ProblemDto dto){

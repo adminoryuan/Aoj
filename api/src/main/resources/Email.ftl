@@ -15,7 +15,7 @@
         <tr>
             <th valign="middle"
                 style="height: 25px; line-height: 25px; padding: 15px 35px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: RGB(148,0,211); background-color: RGB(148,0,211); border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
-                <font face="微软雅黑" size="5" style="color: rgb(255, 255, 255); ">服务器管理系统</font>
+                <font face="微软雅黑" size="5" style="color: rgb(255, 255, 255); ">AOj</font>
             </th>
         </tr>
         <tr>
@@ -42,9 +42,10 @@
                         possible!</p>
                     <div style="width:100%;margin:0 auto;">
                         <div style="padding:10px 10px 0;border-top:1px solid #ccc;color:#747474;margin-bottom:20px;line-height:1.3em;font-size:12px;">
-                            <p>****团队</p>
+                            <p>AOJ团队</p>
                             <p>联系我们：1317332365</p>
                             <p>联系我们：1773463459</p>
+                            <P>github 地址</P>
                             <br>
                             <p>此为系统邮件，请勿回复<br>
                                 Please do not reply to this system email

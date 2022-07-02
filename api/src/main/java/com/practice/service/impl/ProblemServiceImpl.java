@@ -1,12 +1,11 @@
 package com.practice.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.practice.entity.Problem;
 import com.practice.entity.Testdata;
 import com.practice.mapper.ProblemMapper;
-import com.practice.pojo.Dto.JudgeDatadto;
-import com.practice.pojo.Dto.ProblemDto;
+import com.practice.pojo.dto.JudgeDatadto;
+import com.practice.pojo.dto.ProblemDto;
 import com.practice.pojo.Vo.ProUserVo;
 import com.practice.service.ProblemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -52,7 +51,6 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem> impl
             testdata.setInput(input[index]);
             testdata.setAnswer(answer[index]);
             testdata.setSid(dto.getId());
-
             imp.saveOrUpdate(testdata);
             index++;
         }
@@ -71,8 +69,6 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem> impl
 
     @Override
     public List<ProUserVo> getProAll(int page,int size) {
-        System.out.println(page);
-        System.out.println((page-1)*size);
         return this.getBaseMapper().getProAll((page-1)*size,size);
     }
 

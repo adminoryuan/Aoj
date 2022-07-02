@@ -1,7 +1,7 @@
 package com.practice.utils;
 
 import com.practice.entity.User;
-import com.practice.pojo.Dto.Tokendto;
+import com.practice.pojo.dto.Tokendto;
 import com.practice.pojo.Vo.UserOnLineVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

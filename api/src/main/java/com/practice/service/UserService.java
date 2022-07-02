@@ -2,7 +2,9 @@ package com.practice.service;
 
 import com.practice.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.practice.pojo.Dto.Logindto;
+import com.practice.pojo.Req.LoginReq;
+import com.practice.pojo.Req.RegistReq;
+
 import com.practice.pojo.Vo.UserOnLineVO;
 import com.practice.pojo.Vo.UserVO;
 
@@ -10,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ *  登录类
  * </p>
  *
  * @author Vincent
@@ -18,11 +20,11 @@ import java.util.List;
  */
 public interface UserService extends IService<User> {
 
-    UserVO Signel(Logindto userdto);
+    UserVO Signel(LoginReq userdto);
 
     List<UserOnLineVO> getUserAll(int page, int size);
 
-    boolean Regist(Logindto userdto);
+    boolean Regist(RegistReq userdto);
 
-    boolean offonline(Integer userid);
+    boolean offonline(Integer id);
 }

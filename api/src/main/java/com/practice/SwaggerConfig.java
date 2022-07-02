@@ -39,8 +39,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     //配置swagger信息  apiinfo
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("可心的swagger文档")
-                .description("我想认真读一本书")
+                .title("swagger文档")
+                .description("")
                 .version("v3.0")
            //     .termsOfServiceUrl("https://blog.csdn.net/weixin_58993861?type=blog")
                 .contact("程序员")

@@ -2,8 +2,7 @@ package com.practice.config.Security;
 
 import com.alibaba.fastjson.JSON;
 import com.practice.common.Result;
-import com.practice.pojo.Dto.Logindto;
-import com.practice.pojo.Dto.Tokendto;
+import com.practice.pojo.dto.Tokendto;
 import com.practice.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class TokenAuthenticationTokenFilter extends OncePerRequestFilter {

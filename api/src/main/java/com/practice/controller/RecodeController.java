@@ -3,8 +3,7 @@ package com.practice.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.practice.common.Result;
 import com.practice.entity.Recode;
-import com.practice.pojo.Dto.Logindto;
-import com.practice.pojo.Dto.Tokendto;
+import com.practice.pojo.dto.Tokendto;
 import com.practice.service.RecodeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +35,7 @@ public class RecodeController {
     @GetMapping("/getThenRecode")
     @ApiOperation("获取提交记录")
     public Result getThenRecord(@RequestParam int pid){
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Tokendto details1 = (Tokendto)authentication.getPrincipal();
         System.out.println(details1.getUserid());

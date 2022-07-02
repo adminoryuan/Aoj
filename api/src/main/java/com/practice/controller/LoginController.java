@@ -1,17 +1,20 @@
 package com.practice.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.practice.common.Result;
-import com.practice.entity.User;
-import com.practice.pojo.Dto.Logindto;
+import com.practice.pojo.Req.LoginReq;
+import com.practice.pojo.Req.RegistReq;
+
 import com.practice.pojo.Vo.UserVO;
+import com.practice.pojo.dto.Tokendto;
 import com.practice.service.AbstSendverCode;
 import com.practice.service.UserService;
 import com.practice.utils.CheckCodeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Api(value = "Login", description = "登录注册接口")
 @RestController()
 @RequestMapping("/Login")
@@ -70,13 +74,7 @@ public class LoginController {
                             @RequestParam String email) {
 
         HttpSession session = request.getSession();
-
-
-        if (session.getAttribute("EmailCode") != null) {
-            return Result.failed("验证码发送太频繁 请稍后在发送！！");
-        }
-
-        if (session.getAttribute("code") == null || !session.getAttribute("code").equals(Code)) {
+        if (session.getAttribute("code") == null || !session.getAttribute("code").equals(Code)){
             return Result.failed("请输入正确的验证码");
         }
 
@@ -85,11 +83,14 @@ public class LoginController {
             return Result.failed("邮箱格式错误");
         }
 
-        String sendCode = sendCodeObj.Send(email);
+        String sendCode = sendCodeObj.SendVerCode(email);
 
-        session.setAttribute("EmailCode", sendCode + "-" + email);
+        if (sendCode == null) {
+            return Result.failed("验证码发送太频繁 请稍后在发送！！");
+        }
+        session.setAttribute("EmailCode", sendCode);
+        session.setAttribute("Email",email);
 
-        session.setMaxInactiveInterval(60);
 
         return Result.ok("邮件发送成功");
     }
@@ -101,7 +102,8 @@ public class LoginController {
      * @param email
      * @return
      */
-    private boolean VerEmail(String email) {
+    private boolean VerEmail(String email)
+    {
         String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
         Pattern regex = Pattern.compile(check);
         Matcher matcher = regex.matcher("dffdfdf@qq.com");
@@ -110,7 +112,7 @@ public class LoginController {
 
 
     @PostMapping("/Sigle")
-    public Result Login(@Validated @RequestBody Logindto data,
+    public Result Login(@Validated @RequestBody LoginReq data,
                         HttpServletRequest request) {
         HttpSession session = request.getSession();
 
@@ -118,6 +120,7 @@ public class LoginController {
             return Result.failed("验证码错误!!");
         }
 
+        session.invalidate();
         UserVO userVO = service.Signel(data);
 
 
@@ -129,37 +132,37 @@ public class LoginController {
     }
 
 
+    @PostMapping("/Logout")
+    public Result logout(HttpServletRequest request){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Tokendto details1 = (Tokendto)authentication.getPrincipal();
+
+        service.offonline(details1.getUserid());
+
+        return Result.ok("注销成功");
+    }
+
     @PostMapping("/Regist")
-    public Result SaveUser(@RequestBody Logindto user
+    public Result SaveUser(@RequestBody RegistReq user
             , HttpServletRequest req) {
         HttpSession session = req.getSession();
 
-//        System.out.println(session.getAttribute("EmailCode").toString());
-        if (session.getAttribute("EmailCode") == null || !session.getAttribute("EmailCode").toString().split("-")[0].equals(user.getCode())) {
-            return Result.failed("请输入正确的验证码");
+         if (session.getAttribute("EmailCode") == null || !session.getAttribute("EmailCode").toString().split("-")[0].equals(user.getCode())) {
+             session.invalidate();
+             return Result.failed("请输入正确的验证码");
         }
 
-        if (!user.getEmail().equals(session.getAttribute("EmailCode").toString().split("-")[1])) {
+
+        if (!user.getEmail().equals(session.getAttribute("Email"))) {
+            session.invalidate();
             return Result.failed("年轻人不要胡乱测试！！！");
         }
-//        boolean register = service.register(user);
-        User username = service.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
-        //User ic_card = service.getOne(new QueryWrapper<User>().eq("ic_card", user.getIdCard()));
-        User email = service.getOne(new QueryWrapper<User>().eq("email", user.getEmail()));
-      //  User phone = service.getOne(new QueryWrapper<User>().eq("phone", user.getPhone()));
-        if (null != username) {
-            return Result.failed("该用户名已被注册");
+        session.invalidate();
+
+        if (!service.Regist(user)){
+            return Result.failed("注册失败，该用户名已经存在");
         }
-//        if (null != ic_card) {
-//            return Result.failed("该身份证已被注册");
-//        }
-        if (null != email) {
-            return Result.failed("该邮箱已被注册");
-        }
-//        if (null != phone) {
-//            return Result.failed("该电话已被注册");
-//        }
-        service.saveOrUpdate(user);
         return Result.ok("注册成功");
 
     }
