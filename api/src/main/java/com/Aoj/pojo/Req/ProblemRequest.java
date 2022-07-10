@@ -1,4 +1,4 @@
-package com.Aoj.pojo.dto;
+package com.Aoj.pojo.Req;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.Aoj.entity.Problem;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
-public class ProblemDto extends Problem {
+public class ProblemRequest extends Problem {
 
     @NotBlank(message = "题目id不为空")
     @JsonProperty(value = "Pid")

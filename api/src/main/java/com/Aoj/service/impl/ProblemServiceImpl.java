@@ -1,5 +1,6 @@
 package com.Aoj.service.impl;
 
+import com.Aoj.pojo.dto.ProblemRequest;
 import com.Aoj.service.JudgedataService;
 
 import com.Aoj.service.SearchServer;
@@ -8,7 +9,7 @@ import com.Aoj.entity.Problem;
 import com.Aoj.entity.Judgedata;
 import com.Aoj.mapper.ProblemMapper;
 import com.Aoj.pojo.dto.JudgeDatadto;
-import com.Aoj.pojo.dto.ProblemDto;
+
 import com.Aoj.pojo.Vo.ProUserVo;
 import com.Aoj.service.ProblemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -44,7 +45,7 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem> impl
 
     @Transactional
     @Override
-    public boolean AddProblem(ProblemDto dto) {
+    public boolean AddProblem(ProblemRequest dto) {
 
 
 
@@ -102,7 +103,7 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem> impl
      * @return
      */
     @Override
-    public boolean UpProblyem(ProblemDto dto) {
+    public boolean UpProblyem(ProblemRequest dto) {
         if (!this.updateById(dto))return false;
 
         /**

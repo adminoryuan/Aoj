@@ -42,11 +42,12 @@ public class ProblemController {
         return Result.ok(service.getProAll(page,size));
     }
 
+
+
     @GetMapping("/Search")
     public Result SearchProblem(Map<String,String> queryArgent){
         return Result.ok(server.SearchSub(queryArgent));
     }
-
 
 
     @GetMapping("/getProblem")
@@ -60,7 +61,7 @@ public class ProblemController {
 
     @PostMapping("/upProblem")
     @ApiOperation("修改题目")
-    public Result UpProblem(@RequestBody ProblemDto dto){
+    public Result UpProblem(@RequestBody ProblemRequest dto){
         dto.setUserid(1);
 
         if (! service.UpProblyem(dto)){
@@ -72,7 +73,7 @@ public class ProblemController {
 
     @PostMapping("/addPromblem")
     @ApiOperation("添加题目")
-    public Result addProblem(@RequestBody ProblemDto dto){
+    public Result addProblem(@RequestBody ProblemRequest dto){
         dto.setUserid(1);
         if (service.AddProblem(dto)){
             return Result.failed("请填写正确的数据");
